@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="纳税人识别号"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/edt_nasrsbh"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/common_text"
+                android:text="开票终端标识"
+                />
+            <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+                android:id="@+id/edt_kpzdbs"
+                style="@style/common_edit"
+                />
+        </LinearLayout>
+        <TextView
+            android:textSize="14sp"
+            android:background="@color/color_background_gray"
+            android:text="发票票样"
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
+        <Spinner
+            android:id="@+id/fppy_spinner"
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/save_params"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存信息"
+        />
+</RelativeLayout>

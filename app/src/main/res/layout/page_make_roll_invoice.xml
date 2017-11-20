@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="购买方名称"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/purchaser_name"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="纳税人识别号"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/nsrsbh"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="收票人手机号"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/phone_num"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
+        <include layout="@layout/goods_topbar"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/goods_list"
+            android:background="@drawable/linearlayout_no_top_border"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/common_text"
+                android:text="收款员"
+                />
+            <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+                android:id="@+id/payee"
+                style="@style/common_edit"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                style="@style/common_text"
+                android:text="开票人"
+                />
+            <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+                android:id="@+id/invoice_maker"
+                style="@style/common_edit"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下一步"
+            />
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
