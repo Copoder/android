@@ -79,7 +79,7 @@ public class AutoCompleteTextViewWithDeleteView extends AppCompatAutoCompleteTex
     public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
             setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-        }else {
+        } else {
             setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.delete_end_svg), null);
         }
 

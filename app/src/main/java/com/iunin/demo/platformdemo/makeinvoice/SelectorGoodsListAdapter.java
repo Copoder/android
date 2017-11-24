@@ -8,10 +8,9 @@ import android.widget.TextView;
 import com.iunin.demo.platformdemo.R;
 import com.iunin.demo.platformdemo.ui.base.ArrayWapperAdapter;
 import com.iunin.demo.platformdemo.ui.base.ViewHolder;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.TaxGoodCode;
+import com.iunin.demo.platformdemo.utils.GoodsDigitHelper;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +25,8 @@ public class SelectorGoodsListAdapter extends ArrayWapperAdapter<UserGoodsModel>
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
-            convertView = getInflater().inflate(R.layout.item_sel_item,null);
+        if (convertView == null) {
+            convertView = getInflater().inflate(R.layout.item_sel_item, null);
         }
         TextView id_good_name = ViewHolder.get(convertView, R.id.id_good_name);
         TextView id_good_price = ViewHolder.get(convertView, R.id.id_good_price); //含税单价
@@ -41,7 +40,7 @@ public class SelectorGoodsListAdapter extends ArrayWapperAdapter<UserGoodsModel>
         id_good_name.setText(model.spmc);
         id_good_price.setText(model.hsdj.toString());
         id_good_discount.setText("0");
-        id_good_tax.setText(model.sl.toString()+"%");
+        id_good_tax.setText(GoodsDigitHelper.returnPercentSl(model).toString() + "%");
 
         return convertView;
     }

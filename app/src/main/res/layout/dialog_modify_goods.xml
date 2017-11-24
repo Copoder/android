@@ -28,6 +28,7 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/spdj"
             style="@style/common_edit"
+            android:digits="@string/float_num"
             />
     </LinearLayout>
     <LinearLayout
@@ -41,8 +42,24 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/spsl"
             style="@style/common_edit"
+            android:digits="@string/float_num"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="商品税率"
+            />
+        <Spinner
+            android:id="@+id/kysl"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -55,8 +72,10 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/spzk"
             style="@style/common_edit"
+            android:digits="@string/float_num"
             />
     </LinearLayout>
+
 
 
 </LinearLayout>

@@ -5,35 +5,30 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 
+
+import com.iunin.demo.platformdemo.MyApplication;
 import com.iunin.demo.platformdemo.R;
 import com.iunin.demo.platformdemo.myparams.TypeStringAdapter;
 import com.iunin.demo.platformdemo.ui.base.PageActivity;
 import com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView;
 import com.iunin.demo.platformdemo.utils.ConfigUtil;
-import com.iunin.service.invoice.InvoiceProxy;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.InvalidInvoiceModel;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.Result;
+
+import com.iunin.service.invoice.baiwang.v1_0.userModel.InvalidInvoiceModel;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.InvalidInvoiceReturn;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.ResultError;
 
-import static com.iunin.demo.platformdemo.utils.Constants.APPID;
-import static com.iunin.demo.platformdemo.utils.Constants.APP_SCRET;
 import static com.iunin.demo.platformdemo.utils.Constants.FPLX;
 import static com.iunin.demo.platformdemo.utils.Constants.FPLXDM;
 import static com.iunin.demo.platformdemo.utils.Constants.KPZDBS;
 import static com.iunin.demo.platformdemo.utils.Constants.NSRSBH;
-import static com.iunin.demo.platformdemo.utils.Constants.PROXY_TYPE;
-import static com.iunin.demo.platformdemo.utils.Constants.SELECTED_FPPY;
 import static com.iunin.demo.platformdemo.utils.Constants.ZFLX;
 import static com.iunin.demo.platformdemo.utils.Constants.ZFLXDM;
 
@@ -41,7 +36,7 @@ import static com.iunin.demo.platformdemo.utils.Constants.ZFLXDM;
  * Created by copo on 17-11-16.
  */
 
-public class ActivityInvalidInvoice extends PageActivity implements View.OnClickListener{
+public class ActivityInvalidInvoice extends PageActivity implements View.OnClickListener {
     private Spinner zflx;
     private Spinner fplx;
     private AutoCompleteTextViewWithDeleteView fpdm;
@@ -63,10 +58,9 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
     private ConfigUtil mConfigUtil;
 
     private android.support.v7.widget.Toolbar toolbar;
-    private InvoiceProxy mProxy;
 
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -94,12 +88,12 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 zflxdm = ZFLXDM[position];
-                if(position == 0){
+                if (position == 0) {
                     //空白作废
                     ll_fpdm.setVisibility(View.GONE);
                     ll_fphm.setVisibility(View.GONE);
                     ll_hjje.setVisibility(View.GONE);
-                }else {
+                } else {
                     //已开作废
                     ll_fpdm.setVisibility(View.VISIBLE);
                     ll_fphm.setVisibility(View.VISIBLE);
@@ -108,7 +102,7 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
                     fpdm.setFocusable(true);
                     fpdm.requestFocus();
                 }
-                    zflxdm = position+"";
+                zflxdm = position + "";
             }
 
             @Override
@@ -150,7 +144,7 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_invalid:
                 showWaitDialog("正在操作...");
                 invalidInvoice(zflxdm);
@@ -161,9 +155,8 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
     private void invalidInvoice(String type) {
         String zfr = this.zfr.getText().toString();
         String jsbh = mConfigUtil.getString(NSRSBH, "") + "~~" + mConfigUtil.getString(KPZDBS, "");
-        mProxy = new InvoiceProxy(APPID, APP_SCRET, mConfigUtil.getString(NSRSBH, ""), jsbh, mConfigUtil.getString(SELECTED_FPPY, ""), PROXY_TYPE);
         InvalidInvoiceModel invalidInvoiceModel = null;
-        switch (type){
+        switch (type) {
             case KBZF:
                 invalidInvoiceModel = new InvalidInvoiceModel();
                 invalidInvoiceModel.zfr = zfr;
@@ -171,16 +164,16 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
                 invalidInvoiceModel.zflx = type;
                 break;
             case YKZF:
-                invalidInvoiceModel = new InvalidInvoiceModel(fplxdm,type,fpdm.getText().toString()
-                        ,fphm.getText().toString(),hjje.getText().toString(),zfr);
+                invalidInvoiceModel = new InvalidInvoiceModel(fplxdm, type, fpdm.getText().toString()
+                        , fphm.getText().toString(), hjje.getText().toString(), zfr);
                 break;
         }
         final InvalidInvoiceModel invalidInvoiceModel1 = invalidInvoiceModel;
-                new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 Message message = new Message();
-                message.obj = mProxy.invalidInvoice(invalidInvoiceModel1);
+                message.obj = MyApplication.getProxyInstence().invalidInvoice(invalidInvoiceModel1);
                 handler.sendMessage(message);
 
             }
@@ -189,7 +182,7 @@ public class ActivityInvalidInvoice extends PageActivity implements View.OnClick
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

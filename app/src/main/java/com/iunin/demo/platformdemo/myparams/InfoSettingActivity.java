@@ -25,7 +25,7 @@ import static com.iunin.demo.platformdemo.utils.Constants.SELECTED_FPPY;
  * Created by copo on 17-11-15.
  */
 
-public class InfoSettingActivity extends PageActivity implements View.OnClickListener{
+public class InfoSettingActivity extends PageActivity implements View.OnClickListener {
     private ConfigUtil configUtil;
     private AutoCompleteTextViewWithDeleteView act_narsbh;
     private AutoCompleteTextViewWithDeleteView act_kpzdbs;
@@ -55,11 +55,11 @@ public class InfoSettingActivity extends PageActivity implements View.OnClickLis
     }
 
     private void setParams() {
-        act_narsbh.setText(configUtil.getString(NSRSBH,""));
-        act_kpzdbs.setText(configUtil.getString(KPZDBS,""));
+        act_narsbh.setText(configUtil.getString(NSRSBH, ""));
+        act_kpzdbs.setText(configUtil.getString(KPZDBS, ""));
         typeStringAdapter = new TypeStringAdapter(Constants.FPPY);
         fppy_spinner.setAdapter(typeStringAdapter);
-        fppy_spinner.setSelection(getSavedFppyIndex(configUtil.getString(SELECTED_FPPY,FPPY[0])));
+        fppy_spinner.setSelection(getSavedFppyIndex(configUtil.getString(SELECTED_FPPY, FPPY[0])));
         fppy_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -75,10 +75,10 @@ public class InfoSettingActivity extends PageActivity implements View.OnClickLis
 
     }
 
-    private int getSavedFppyIndex(String str){
+    private int getSavedFppyIndex(String str) {
         int index = 0;
-        for(int i = 0;i<FPPY.length;i++){
-            if (str.equals(FPPY[i])){
+        for (int i = 0; i < FPPY.length; i++) {
+            if (str.equals(FPPY[i])) {
                 index = i;
             }
         }
@@ -87,7 +87,7 @@ public class InfoSettingActivity extends PageActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.save_params:
                 saveParams();
                 break;
@@ -95,14 +95,14 @@ public class InfoSettingActivity extends PageActivity implements View.OnClickLis
     }
 
     private void saveParams() {
-        configUtil.putString(NSRSBH,act_narsbh.getText().toString());
-        configUtil.putString(KPZDBS,act_kpzdbs.getText().toString());
+        configUtil.putString(NSRSBH, act_narsbh.getText().toString());
+        configUtil.putString(KPZDBS, act_kpzdbs.getText().toString());
         configUtil.putString(SELECTED_FPPY, (String) typeStringAdapter.getItem(fppy_spinner.getSelectedItemPosition()));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 break;

@@ -24,7 +24,7 @@ import static com.iunin.demo.platformdemo.utils.Constants.*;
  * Created by copo on 17-11-22.
  */
 
-public class PageQueryInvoiceData extends PageFragment implements View.OnClickListener{
+public class PageQueryInvoiceData extends PageFragment implements View.OnClickListener {
     private ConfigUtil mConfigUtil;
     private int fplx_position;
     private AutoCompleteTextViewWithDeleteView inputFphm;
@@ -40,15 +40,15 @@ public class PageQueryInvoiceData extends PageFragment implements View.OnClickLi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.page_query_invoice,null);
+        View rootView = inflater.inflate(R.layout.page_query_invoice, null);
         initView(rootView);
         return rootView;
     }
 
     private void initView(View rootView) {
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(null);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
         setHasOptionsMenu(true);
         inputFpdmlx = rootView.findViewById(R.id.fpdmlx);
         inputFphm = rootView.findViewById(R.id.invoice_num);
@@ -77,7 +77,7 @@ public class PageQueryInvoiceData extends PageFragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_save:
                 saveQueryParam();
                 break;
@@ -86,7 +86,7 @@ public class PageQueryInvoiceData extends PageFragment implements View.OnClickLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 switchToPage(new PageDisPlaySetting());
                 break;
@@ -95,15 +95,15 @@ public class PageQueryInvoiceData extends PageFragment implements View.OnClickLi
     }
 
     private void saveQueryParam() {
-        mConfigUtil.putInt(SAVED_QUERY_POSITON_FPLXDM,fplx_position);
-        mConfigUtil.putString(SAVED_QUERY_NUM,inputFphm.getText().toString());
-        mConfigUtil.putString(SAVED_QUERY_CODE,inputFpdm.getText().toString());
+        mConfigUtil.putInt(SAVED_QUERY_POSITON_FPLXDM, fplx_position);
+        mConfigUtil.putString(SAVED_QUERY_NUM, inputFphm.getText().toString());
+        mConfigUtil.putString(SAVED_QUERY_CODE, inputFpdm.getText().toString());
         showToast("保存成功");
     }
 
-    private void showSavedParam(){
-        inputFpdmlx.setSelection(mConfigUtil.getInt(SAVED_QUERY_POSITON_FPLXDM,0));
-        inputFphm.setText(mConfigUtil.getString(SAVED_QUERY_NUM,""));
-        inputFpdm.setText(mConfigUtil.getString(SAVED_QUERY_CODE,""));
+    private void showSavedParam() {
+        inputFpdmlx.setSelection(mConfigUtil.getInt(SAVED_QUERY_POSITON_FPLXDM, 0));
+        inputFphm.setText(mConfigUtil.getString(SAVED_QUERY_NUM, ""));
+        inputFpdm.setText(mConfigUtil.getString(SAVED_QUERY_CODE, ""));
     }
 }

@@ -29,13 +29,13 @@ public class FunctionItem {
         this.clazz = clazz;
     }
 
-    public FunctionItem(String title, int image, Class clazz){
+    public FunctionItem(String title, int image, Class clazz) {
         this.title = title;
         this.image = image;
         this.clazz = clazz;
     }
 
-    public FunctionItem(String title,int image){
+    public FunctionItem(String title, int image) {
         this.title = title;
         this.image = image;
     }

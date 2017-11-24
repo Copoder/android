@@ -58,8 +58,8 @@ public class PageInvoiceData extends PageFragment implements View.OnClickListene
         btn_save.setOnClickListener(this);
 
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(null);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(null);
         setHasOptionsMenu(true);
         autoFillData();
 
@@ -89,21 +89,21 @@ public class PageInvoiceData extends PageFragment implements View.OnClickListene
 
     private void autoFillData() {
 
-            purchaser_name.setText(getConfigUtil().getString(DISPLAY_GMFMC,""));
-            nsrsbh.setText(getConfigUtil().getString(DISPLAY_NSRSBH,""));
-            address_phone.setText(getConfigUtil().getString(DISPLAY_DZDH,""));
-            bank_account.setText(getConfigUtil().getString(DISPLAY_KHHJZH,""));
-            phone_num.setText(getConfigUtil().getString(DISPLAY_SPRSJH,""));
-            payee.setText(getConfigUtil().getString(DISPLAY_SKY,""));
-            rechecker.setText(getConfigUtil().getString(DISPLAY_FHR,""));
-            invoice_maker.setText(getConfigUtil().getString(DISPLAY_KPR,""));
-            remark.setText(getConfigUtil().getString(DISPLAY_BZ,""));
+        purchaser_name.setText(getConfigUtil().getString(DISPLAY_GMFMC, ""));
+        nsrsbh.setText(getConfigUtil().getString(DISPLAY_NSRSBH, ""));
+        address_phone.setText(getConfigUtil().getString(DISPLAY_DZDH, ""));
+        bank_account.setText(getConfigUtil().getString(DISPLAY_KHHJZH, ""));
+        phone_num.setText(getConfigUtil().getString(DISPLAY_SPRSJH, ""));
+        payee.setText(getConfigUtil().getString(DISPLAY_SKY, ""));
+        rechecker.setText(getConfigUtil().getString(DISPLAY_FHR, ""));
+        invoice_maker.setText(getConfigUtil().getString(DISPLAY_KPR, ""));
+        remark.setText(getConfigUtil().getString(DISPLAY_BZ, ""));
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 switchToPage(new PageDisPlaySetting());
                 break;

@@ -10,20 +10,21 @@ import android.widget.Toast;
 
 public class PageActivity extends AppCompatActivity {
     private ProgressDialog dialog;
-    protected void showWaitDialog(String message){
+
+    protected void showWaitDialog(String message) {
         dialog = new ProgressDialog(this);
         dialog.setMessage(message);
         dialog.setCancelable(false);
         dialog.show();
     }
 
-    protected void dismissWaitDialog(){
-        if(dialog != null && dialog.isShowing()){
+    protected void dismissWaitDialog() {
+        if (dialog != null && dialog.isShowing()) {
             this.dialog.dismiss();
         }
     }
 
-    protected void showToast(String message){
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    protected void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

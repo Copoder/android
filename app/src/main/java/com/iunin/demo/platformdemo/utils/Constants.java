@@ -37,7 +37,7 @@ public class Constants {
     /**
      * APPID 联云平台提供
      */
-    public static final int APPID = 123;
+    public static final String APPID = "123";
     /**
      * APPKEY 联云平台提供
      */
@@ -115,4 +115,27 @@ public class Constants {
     public static String SAVED_INVALID_KB_ZFLXDM = "saved_valid_zflxdm";
     public static String SAVED_INVALID_KB_FPLXDM = "saved_valid_fplxdm";
     public static String SAVED_INVALID_KB_ZFR = "saved_invid_zfr";
+    /**
+     * 发票状态代码
+     */
+    public static String[] FPZTDM = {
+            "00",
+            "01",
+            "02",
+            "03",
+            "04"
+    };
+    /**
+     * 发票状态描述
+     */
+
+    public static String[] FPZT = {
+            "已开具的正数发票",
+            "已开具的负数发票",
+            "未开具发票的作废发票",
+            "已开具正数发票的作废发票",
+            "已开具负数发票的作废发票"
+    };
+
+    public static String TAXPLAYERID = "110101201612220010";
 }

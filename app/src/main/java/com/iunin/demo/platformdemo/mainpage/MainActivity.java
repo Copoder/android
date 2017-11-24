@@ -37,23 +37,23 @@ public class MainActivity extends PageActivity {
         mainFunctionList = findViewById(R.id.main_function);
         functionItems = new ArrayList<>();
         initFuction(functionItems);
-        FunctionAdapter adapter = new FunctionAdapter(functionItems,mContext);
+        FunctionAdapter adapter = new FunctionAdapter(functionItems, mContext);
         mainFunctionList.setAdapter(adapter);
         mainFunctionList.setLayoutManager(new LinearLayoutManager(mContext));
         adapter.setOnItemClickListener(new FunctionAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
-                Intent intent = new Intent(mContext,functionItems.get(position).getClazz());
+                Intent intent = new Intent(mContext, functionItems.get(position).getClazz());
                 startActivity(intent);
             }
         });
     }
 
     private void initFuction(List<FunctionItem> items) {
-        items.add(new FunctionItem("发票开具",R.drawable.kp, MakeInvoiceActivity.class));
-        items.add(new FunctionItem("发票查询",R.drawable.query, ActivityQueryInvoice.class));
-        items.add(new FunctionItem("发票作废",R.drawable.invaild, ActivityInvalidInvoice.class));
-        items.add(new FunctionItem("我的信息",R.drawable.mine, InfoSettingActivity.class));
-        items.add(new FunctionItem("展示设置",R.drawable.display, ActivityDisplayInfo.class));
+        items.add(new FunctionItem("发票开具", R.drawable.kp, MakeInvoiceActivity.class));
+        items.add(new FunctionItem("发票查询", R.drawable.query, ActivityQueryInvoice.class));
+        items.add(new FunctionItem("发票作废", R.drawable.invaild, ActivityInvalidInvoice.class));
+        items.add(new FunctionItem("我的信息", R.drawable.mine, InfoSettingActivity.class));
+        items.add(new FunctionItem("展示设置", R.drawable.display, ActivityDisplayInfo.class));
     }
 }

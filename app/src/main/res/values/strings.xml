@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">云票平台Demo</string>
+    <string name="num">0123456789</string>
+    <string name="float_num">0123456789.</string>
 </resources>

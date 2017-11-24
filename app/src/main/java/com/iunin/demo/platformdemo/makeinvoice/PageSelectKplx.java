@@ -20,12 +20,13 @@ import static com.iunin.demo.platformdemo.utils.Constants.*;
  * Created by copo on 17-11-22.
  */
 
-public class PageSelectKplx extends PageFragment implements View.OnClickListener{
-    private static final String[] TYPE = {"ROLL","NORMAL"};
+public class PageSelectKplx extends PageFragment implements View.OnClickListener {
+    private static final String[] TYPE = {"ROLL", "NORMAL"};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.page_select_fplx,null);
+        View rootView = inflater.inflate(R.layout.page_select_fplx, null);
         initView(rootView);
         return rootView;
     }
@@ -40,8 +41,8 @@ public class PageSelectKplx extends PageFragment implements View.OnClickListener
         rlJp.setOnClickListener(this);
         rlDzp.setOnClickListener(this);
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar()
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar()
                 .setTitle(null);
         setHasOptionsMenu(true);
 
@@ -49,40 +50,41 @@ public class PageSelectKplx extends PageFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_zp:
-                getConfigUtil().putString(KPLXDM,"004");
+                getConfigUtil().putString(KPLXDM, "004");
                 switchPage(TYPE[0]);
                 break;
             case R.id.rl_pp:
-                getConfigUtil().putString(KPLXDM,"007");
+                getConfigUtil().putString(KPLXDM, "007");
                 switchPage(TYPE[0]);
                 break;
             case R.id.rl_dzp:
-                getConfigUtil().putString(KPLXDM,"026");
-                switchPage(TYPE[0]);
+                showToast("电子发票暂不可用");
+//                getConfigUtil().putString(KPLXDM, "026");
+//                switchPage(TYPE[0]);
                 break;
             case R.id.rl_jp:
-                getConfigUtil().putString(KPLXDM,"025");
+                getConfigUtil().putString(KPLXDM, "025");
                 switchPage(TYPE[1]);
                 break;
         }
     }
 
-    private void switchPage(String type){
-        if(type.equals(TYPE[0])){
+    private void switchPage(String type) {
+        if (type.equals(TYPE[0])) {
             switchToPage(new PageMakeNormalInvoice());
-        }else {
+        } else {
             switchToPage(new PageMakeRollInvoce());
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().finish();
-                        break;
+                break;
         }
         return true;
     }

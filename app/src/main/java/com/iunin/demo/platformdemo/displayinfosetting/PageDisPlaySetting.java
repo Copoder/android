@@ -45,14 +45,14 @@ public class PageDisPlaySetting extends PageFragment {
         items = new ArrayList<>();
         ListView listView = rootView.findViewById(R.id.lv_display);
         items.add(new DisplayItem("开票基本信息", new PageInvoiceData()));
-        items.add(new DisplayItem("发票查询信息",new PageQueryInvoiceData()));
-        items.add(new DisplayItem("发票作废信息",new PageInvalidInvoice()));
+        items.add(new DisplayItem("发票查询信息", new PageQueryInvoiceData()));
+        items.add(new DisplayItem("发票作废信息", new PageInvalidInvoice()));
         listView.setAdapter(new ItemAdapter(items));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //FIXME 发票作废信息功能尚未完成
-                if(position == 2){
+                if (position == 2) {
                     showToast("暂不可用");
                     return;
                 }

@@ -19,27 +19,26 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.iunin.demo.platformdemo.MyApplication;
 import com.iunin.demo.platformdemo.R;
+import com.iunin.demo.platformdemo.myparams.TypeStringAdapter;
 import com.iunin.demo.platformdemo.ui.base.PageFragment;
 import com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView;
 import com.iunin.demo.platformdemo.utils.ConfigUtil;
-import com.iunin.demo.platformdemo.utils.DigitHelper;
-import com.iunin.service.invoice.InvoiceProxy;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.InvoiceReturn;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.PrintInvoiceModel;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.Result;
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.TaxGoodCode;
+import com.iunin.demo.platformdemo.utils.GoodsDigitHelper;
+import com.iunin.service.invoice.baiwang.v1_0.userModel.InvoiceReturn;
+import com.iunin.service.invoice.baiwang.v1_0.userModel.PrintInvoiceModel;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.PurchaserInfo;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.ResultError;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserInvoiceModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,8 +118,8 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
                             @Override
                             public void run() {
                                 Message message = new Message();
-                                message.obj = proxy.printInvoice(new PrintInvoiceModel(mConfigUtil.getString(KPLXDM,""),
-                                        fpdm,fphm));
+                                message.obj = MyApplication.getProxyInstence().printInvoice(new PrintInvoiceModel(mConfigUtil.getString(KPLXDM, ""),
+                                        fpdm, fphm));
                                 message.what = PRINT_INVOICE;
                                 handler.sendMessage(message);
                             }
@@ -140,14 +139,11 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
     }
 
     private PurchaserInfo purchaserInfo;
-    private InvoiceProxy proxy;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mConfigUtil = new ConfigUtil(getContext());
-        String jsbh = mConfigUtil.getString(NSRSBH, "") + "~~" + mConfigUtil.getString(KPZDBS, "");
-        proxy = new InvoiceProxy(APPID, APP_SCRET, mConfigUtil.getString(NSRSBH, ""), jsbh, mConfigUtil.getString(SELECTED_FPPY, ""), PROXY_TYPE);
         queryGoods();
     }
 
@@ -157,7 +153,7 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
             @Override
             public void run() {
                 Message message = new Message();
-                message.obj = proxy.queryGoodList(mConfigUtil.getString(KPLXDM, ""));
+                message.obj = MyApplication.getProxyInstence().queryGoodList(mConfigUtil.getString(KPLXDM, ""));
                 message.what = QUERY_GOODS;
                 handler.sendMessage(message);
             }
@@ -230,7 +226,7 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ResultError<InvoiceReturn> invoiceReturn = proxy.makeOutInvoice(mUserInvoiceModel);
+                ResultError<InvoiceReturn> invoiceReturn = MyApplication.getProxyInstence().makeOutInvoice(mUserInvoiceModel);
                 Message message = new Message();
                 message.obj = invoiceReturn;
                 message.what = FILL_OUT_INVOICE;
@@ -263,9 +259,9 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserGoodsModel model = savedGoodsModels.get(position);
                 model.spsl = "1.0";
-                model.zk = "0.0";
-                model.se = DigitHelper.retuenSe(model);
-                model.hsje = DigitHelper.returnHsje(model);
+                model.zk = "0";
+                model.se = GoodsDigitHelper.retuenSe(model);
+                model.hsje = GoodsDigitHelper.returnHsje(model);
                 goodsModels.add(model);
                 mAdapter.notifyDataSetChanged();
                 materialDialog.dismiss();
@@ -358,6 +354,9 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
         final AutoCompleteTextViewWithDeleteView spdj = rootView.findViewById(R.id.spdj);
         final AutoCompleteTextViewWithDeleteView spsl = rootView.findViewById(R.id.spsl);
         final AutoCompleteTextViewWithDeleteView spzk = rootView.findViewById(R.id.spzk);
+        Spinner spinner = rootView.findViewById(R.id.kysl);
+        TypeStringAdapter adapter = new TypeStringAdapter(TypeStringAdapter.StringListToArray(model.kysl));
+        spinner.setAdapter(adapter);
         spmc.setText(model.spmc);
         spdj.setText(model.hsdj);
         spsl.setText(model.spsl);
@@ -374,8 +373,8 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
                         model.spsl = spsl.getText().toString();
                         model.hsdj = spdj.getText().toString();
                         model.zk = spzk.getText().toString();
-                        model.hsje = DigitHelper.returnHsje(model);
-                        model.se = DigitHelper.retuenSe(model);
+                        model.hsje = GoodsDigitHelper.returnHsje(model);
+                        model.se = GoodsDigitHelper.retuenSe(model);
                         mAdapter.notifyDataSetChanged();
                     }
                 })
@@ -411,7 +410,7 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
         GoodsListViewAdapter adapter = new GoodsListViewAdapter(model.goodList);
         lv_goodlist.setAdapter(adapter);
 
-        tv_xsfmc.setText("销货单位名称");
+        tv_xsfmc.setText("深圳联云");
 
         tv_gmfmc.setText(model.purchaserInfo.ghdwmc);
         tv_nsrsbh.setText(model.purchaserInfo.ghdwsbh);
@@ -423,6 +422,8 @@ public class PageMakeNormalInvoice extends PageFragment implements View.OnClickL
         tv_fhr.setText(model.fhr);
         tv_kpr.setText(model.kpr);
         tv_bz.setText(model.bz);
+        tv_hjje.setText(GoodsDigitHelper.returnListHjje(model.goodList));
+        tv_hjse.setText(GoodsDigitHelper.returnListHjse(model.goodList));
 
     }
 

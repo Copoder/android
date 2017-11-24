@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.iunin.demo.platformdemo.R;
 import com.iunin.demo.platformdemo.utils.Constants;
 
+import java.util.List;
+
 /**
  * Created by copo on 17-11-16.
  */
@@ -17,7 +19,7 @@ import com.iunin.demo.platformdemo.utils.Constants;
 public class TypeStringAdapter implements SpinnerAdapter {
     private String[] datas;
 
-    public TypeStringAdapter(String[] datas){
+    public TypeStringAdapter(String[] datas) {
         this.datas = datas;
     }
 
@@ -78,5 +80,18 @@ public class TypeStringAdapter implements SpinnerAdapter {
     @Override
     public boolean isEmpty() {
         return false;
+    }
+
+    public static String[] StringListToArray (List<String> stringList){
+        int i = 0;
+        String[] stringArray = {};
+        if(stringList.size() == 0){
+            return  stringArray;
+        }
+        for(String str:stringList){
+            stringArray[i] = str;
+            i++;
+        }
+        return stringArray;
     }
 }

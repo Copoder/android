@@ -18,9 +18,11 @@ import java.util.List;
 
 public class GoodsListViewAdapter extends BaseAdapter {
     private List<UserGoodsModel> mGoodsModels;
-    public GoodsListViewAdapter(List<UserGoodsModel> mGoodsModels){
+
+    public GoodsListViewAdapter(List<UserGoodsModel> mGoodsModels) {
         this.mGoodsModels = mGoodsModels;
     }
+
     @Override
     public int getCount() {
         return this.mGoodsModels.size();
@@ -39,12 +41,12 @@ public class GoodsListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         UserGoodsModel model = mGoodsModels.get(position);
-        ViewHodel viewHodel ;
-        if(convertView != null){
+        ViewHodel viewHodel;
+        if (convertView != null) {
             viewHodel = (ViewHodel) convertView.getTag();
-        }else {
+        } else {
             viewHodel = new ViewHodel();
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_edit_good,parent,false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_edit_good, parent, false);
             viewHodel.tv_name = convertView.findViewById(R.id.id_good_name);
             viewHodel.tv_dj = convertView.findViewById(R.id.id_good_price);
             viewHodel.tv_count = convertView.findViewById(R.id.id_good_count);
@@ -59,7 +61,8 @@ public class GoodsListViewAdapter extends BaseAdapter {
         viewHodel.tv_count.setText(model.spsl);
         return convertView;
     }
-    class ViewHodel{
+
+    class ViewHodel {
         public TextView tv_name;
         public TextView tv_dj;
         public TextView tv_count;

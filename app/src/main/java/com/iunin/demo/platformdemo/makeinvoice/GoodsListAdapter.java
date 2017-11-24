@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iunin.demo.platformdemo.R;
+import com.iunin.demo.platformdemo.utils.GoodsDigitHelper;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
 
 import java.util.List;
@@ -25,14 +26,15 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private OnItemClickGoodsListener onItemClickGoodsListener;
 
-    public GoodsListAdapter(List<UserGoodsModel> goods, Context context){
+    public GoodsListAdapter(List<UserGoodsModel> goods, Context context) {
         this.goods = goods;
         mContext = context;
     }
 
-    public void setOnItemClickGoodsListener(OnItemClickGoodsListener onItemClickGoodsListener){
+    public void setOnItemClickGoodsListener(OnItemClickGoodsListener onItemClickGoodsListener) {
         this.onItemClickGoodsListener = onItemClickGoodsListener;
     }
+
     class GoodsListHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView price;
@@ -59,12 +61,12 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == TYPE_ADD){
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_goods,parent,false);
+        if (viewType == TYPE_ADD) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_goods, parent, false);
             AddGoodsHolder addGoodsHolder = new AddGoodsHolder(itemView);
             return addGoodsHolder;
-        }else {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_edit_good,parent,false);
+        } else {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_edit_good, parent, false);
             GoodsListHolder goodsListHolder = new GoodsListHolder(itemView);
             return goodsListHolder;
         }
@@ -73,8 +75,8 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         final int i = position;
-        if(holder instanceof AddGoodsHolder){
-            if(onItemClickGoodsListener != null){
+        if (holder instanceof AddGoodsHolder) {
+            if (onItemClickGoodsListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -83,7 +85,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
                 });
             }
-        }else {
+        } else {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,11 +93,11 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             });
             final UserGoodsModel goodsModel = goods.get(position);
-            ((GoodsListHolder)holder).name.setText(goodsModel.spmc);
-            ((GoodsListHolder)holder).price.setText(goodsModel.hsdj);
-            ((GoodsListHolder)holder).count.setText(goodsModel.spsl);
-            ((GoodsListHolder)holder).taxRate.setText(goodsModel.sl);
-            ((GoodsListHolder)holder).btn_delete.setOnClickListener(new View.OnClickListener() {
+            ((GoodsListHolder) holder).name.setText(goodsModel.spmc);
+            ((GoodsListHolder) holder).price.setText(goodsModel.hsdj);
+            ((GoodsListHolder) holder).count.setText(goodsModel.spsl);
+            ((GoodsListHolder) holder).taxRate.setText(GoodsDigitHelper.returnPercentSl(goodsModel) + "%");
+            ((GoodsListHolder) holder).btn_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //删除商品的点击事件
@@ -109,9 +111,9 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if(position == goods.size()){
+        if (position == goods.size()) {
             return TYPE_ADD;
-        }else {
+        } else {
             return TYPE_CONTENT;
         }
     }
@@ -121,9 +123,10 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return goods.size() + 1;
     }
 
-    interface OnItemClickGoodsListener{
+    interface OnItemClickGoodsListener {
         //添加
         void addGoods();
+
         //修改
         void modify(UserGoodsModel model);
     }

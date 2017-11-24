@@ -36,7 +36,7 @@ public class PageInvalidInvoice extends PageFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.page_invalid_invoice_data,null);
+        View rootView = inflater.inflate(R.layout.page_invalid_invoice_data, null);
         initView(rootView);
         return rootView;
     }
@@ -84,35 +84,35 @@ public class PageInvalidInvoice extends PageFragment {
     }
 
     private void saveParams() {
-        if(zflxdm != 0){
+        if (zflxdm != 0) {
 
-            getConfigUtil().putInt(SAVED_INVALID_ZFLXDM,zflxdm);
-            getConfigUtil().putString(SAVED_INVALID_FPLXDM,fplxdm);
-            getConfigUtil().putString(SAVED_INVALID_FPDM,fpdm.getText().toString());
-            getConfigUtil().putString(SAVED_INVALID_FPHM,fphm.getText().toString());
-            getConfigUtil().putString(SAVED_INVALID_HJJE,hjje.getText().toString());
-            getConfigUtil().putString(SAVED_INVALID_ZFR,zfr.getText().toString());
-        }else {
-            getConfigUtil().putString(SAVED_INVALID_KB_FPLXDM,fplxdm);
-            getConfigUtil().putInt(SAVED_INVALID_KB_ZFLXDM,zflxdm);
-            getConfigUtil().putString(SAVED_INVALID_KB_ZFR,zfr.getText().toString());
+            getConfigUtil().putInt(SAVED_INVALID_ZFLXDM, zflxdm);
+            getConfigUtil().putString(SAVED_INVALID_FPLXDM, fplxdm);
+            getConfigUtil().putString(SAVED_INVALID_FPDM, fpdm.getText().toString());
+            getConfigUtil().putString(SAVED_INVALID_FPHM, fphm.getText().toString());
+            getConfigUtil().putString(SAVED_INVALID_HJJE, hjje.getText().toString());
+            getConfigUtil().putString(SAVED_INVALID_ZFR, zfr.getText().toString());
+        } else {
+            getConfigUtil().putString(SAVED_INVALID_KB_FPLXDM, fplxdm);
+            getConfigUtil().putInt(SAVED_INVALID_KB_ZFLXDM, zflxdm);
+            getConfigUtil().putString(SAVED_INVALID_KB_ZFR, zfr.getText().toString());
         }
     }
 
-    private void showSavedParams(){
-        if(getConfigUtil().getInt(SAVED_INVALID_ZFLXDM,0) == 0){
+    private void showSavedParams() {
+        if (getConfigUtil().getInt(SAVED_INVALID_ZFLXDM, 0) == 0) {
             //空白作废
-            spinnerZflx.setSelection(getConfigUtil().getInt(SAVED_INVALID_ZFLXDM,0));
-            spinnerFplx.setSelection(getFplxdmPostion(getConfigUtil().getString(SAVED_INVALID_FPLXDM,"")));
-            zfr.setText(getConfigUtil().getString(SAVED_INVALID_ZFR,""));
-        }else {
+            spinnerZflx.setSelection(getConfigUtil().getInt(SAVED_INVALID_ZFLXDM, 0));
+            spinnerFplx.setSelection(getFplxdmPostion(getConfigUtil().getString(SAVED_INVALID_FPLXDM, "")));
+            zfr.setText(getConfigUtil().getString(SAVED_INVALID_ZFR, ""));
+        } else {
             //已开作废
-            spinnerZflx.setSelection(getConfigUtil().getInt(SAVED_INVALID_ZFLXDM,0));
-            spinnerFplx.setSelection(getFplxdmPostion(getConfigUtil().getString(SAVED_INVALID_FPLXDM,"")));
-            zfr.setText(getConfigUtil().getString(SAVED_INVALID_ZFR,""));
-            fpdm.setText(getConfigUtil().getString(SAVED_INVALID_FPDM,""));
-            fphm.setText(getConfigUtil().getString(SAVED_INVALID_FPHM,""));
-            hjje.setText(getConfigUtil().getString(SAVED_INVALID_HJJE,""));
+            spinnerZflx.setSelection(getConfigUtil().getInt(SAVED_INVALID_ZFLXDM, 0));
+            spinnerFplx.setSelection(getFplxdmPostion(getConfigUtil().getString(SAVED_INVALID_FPLXDM, "")));
+            zfr.setText(getConfigUtil().getString(SAVED_INVALID_ZFR, ""));
+            fpdm.setText(getConfigUtil().getString(SAVED_INVALID_FPDM, ""));
+            fphm.setText(getConfigUtil().getString(SAVED_INVALID_FPHM, ""));
+            hjje.setText(getConfigUtil().getString(SAVED_INVALID_HJJE, ""));
         }
 
     }

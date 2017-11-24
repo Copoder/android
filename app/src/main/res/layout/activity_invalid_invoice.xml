@@ -70,6 +70,8 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/invoice_code"
             style="@style/common_edit"
+            android:inputType="number"
+            android:digits="@string/num"
             />
     </LinearLayout>
     <LinearLayout
@@ -84,6 +86,7 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/invoice_num"
             style="@style/common_edit"
+            android:digits="@string/num"
             />
     </LinearLayout>
     <LinearLayout
@@ -98,6 +101,7 @@
         <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
             android:id="@+id/hjje"
             style="@style/common_edit"
+            android:digits="@string/float_num"
             />
     </LinearLayout>
     <LinearLayout

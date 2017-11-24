@@ -19,26 +19,26 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.iunin.demo.platformdemo.MyApplication;
 import com.iunin.demo.platformdemo.R;
 import com.iunin.demo.platformdemo.ui.base.PageFragment;
 import com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView;
 import com.iunin.demo.platformdemo.utils.ConfigUtil;
-import com.iunin.demo.platformdemo.utils.DigitHelper;
-import com.iunin.service.invoice.InvoiceProxy;
+import com.iunin.demo.platformdemo.utils.GoodsDigitHelper;
 
-
-import com.iunin.service.invoice.baiwang.v1_0.Invoicemodel.InvoiceReturn;
+import com.iunin.service.invoice.baiwang.v1_0.userModel.InvoiceProxy;
+import com.iunin.service.invoice.baiwang.v1_0.userModel.InvoiceReturn;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.PurchaserInfo;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.ResultError;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserInvoiceModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,14 +83,7 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
                     break;
                 case FILL_OUT_INVOICE:
                     ResultError<InvoiceReturn> resultInvoice = (ResultError<InvoiceReturn>) msg.obj;
-                    if(!resultInvoice.hasError()){
-                        //TODO 打印？
-
-                    }
                     showToast(resultInvoice.massage);
-                    break;
-                case PRINT_INVOICE:
-
                     break;
             }
         }
@@ -101,7 +94,6 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
         super.onCreate(savedInstanceState);
         mConfigUtil = new ConfigUtil(getContext());
         String jsbh = mConfigUtil.getString(NSRSBH, "") + "~~" + mConfigUtil.getString(KPZDBS, "");
-        proxy = new InvoiceProxy(APPID, APP_SCRET, mConfigUtil.getString(NSRSBH, ""), jsbh, mConfigUtil.getString(SELECTED_FPPY, ""), PROXY_TYPE);
     }
 
     private void initView(View rootView) {
@@ -146,14 +138,13 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
         return rootView;
     }
 
-    // TODO/**查询商品,暂模拟数据**/
     public void queryGoods() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Message message = new Message();
                 message.what = QUERY_GOODS;
-                message.obj = proxy.queryGoodList(mConfigUtil.getString(KPLXDM,""));
+                message.obj = MyApplication.getProxyInstence().queryGoodList(mConfigUtil.getString(KPLXDM, ""));
                 handler.sendMessage(message);
             }
         }).start();
@@ -172,8 +163,8 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
                 UserGoodsModel model = savedGoodsModels.get(position);
                 model.spsl = "1.0";
                 model.zk = "0.0";
-                model.se = DigitHelper.retuenSe(model);
-                model.hsje = DigitHelper.returnHsje(model);
+                model.se = GoodsDigitHelper.retuenSe(model);
+                model.hsje = GoodsDigitHelper.returnHsje(model);
                 goodsModels.add(model);
                 mAdapter.notifyDataSetChanged();
                 materialDialog.dismiss();
@@ -198,7 +189,7 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
             public void run() {
                 Message message = new Message();
                 message.what = FILL_OUT_INVOICE;
-                message.obj = proxy.makeOutInvoice(mUserInvoiceModel);
+                message.obj = MyApplication.getProxyInstence().makeOutInvoice(mUserInvoiceModel);
                 handler.sendMessage(message);
             }
         }).start();
@@ -218,8 +209,6 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
                 mUserInvoiceModel.skr = payee.getText().toString();
                 mUserInvoiceModel.purchaserInfo = purchaserInfo;
                 mUserInvoiceModel.yhlx = "0";
-                String jsbh = mConfigUtil.getString(NSRSBH, "") + "~~" + mConfigUtil.getString(KPZDBS, "");
-                final InvoiceProxy proxy = new InvoiceProxy(APPID, APP_SCRET, mConfigUtil.getString(NSRSBH, ""), jsbh, mConfigUtil.getString(SELECTED_FPPY, ""), PROXY_TYPE);
                 createPreViewDialog(mUserInvoiceModel);
                 break;
         }
@@ -231,9 +220,14 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
         final AutoCompleteTextViewWithDeleteView spdj = rootView.findViewById(R.id.spdj);
         final AutoCompleteTextViewWithDeleteView spsl = rootView.findViewById(R.id.spsl);
         final AutoCompleteTextViewWithDeleteView spzk = rootView.findViewById(R.id.spzk);
+        Spinner spinner = rootView.findViewById(R.id.kysl);
+//        TypeStringAdapter adapter = new TypeStringAdapter(TypeStringAdapter.StringListToArray(model.kysl));
+        //FIXME 有问题
+        //        spinner.setAdapter(adapter);
         spmc.setText(model.spmc);
         spdj.setText(model.hsdj);
         spsl.setText(model.spsl);
+        spzk.setText(model.zk);
         MaterialDialog dialog = new MaterialDialog.Builder(getContext())
                 .titleGravity(GravityEnum.CENTER)
                 .title("商品信息修改")
@@ -242,11 +236,12 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        //notify
                         model.spsl = spsl.getText().toString();
                         model.hsdj = spdj.getText().toString();
                         model.zk = spzk.getText().toString();
-                        model.hsje = DigitHelper.returnHsje(model);
-                        model.se = DigitHelper.retuenSe(model);
+                        model.hsje = GoodsDigitHelper.returnHsje(model);
+                        model.se = GoodsDigitHelper.retuenSe(model);
                         mAdapter.notifyDataSetChanged();
                     }
                 })
@@ -267,8 +262,12 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
 
     private void autoFillData() {
         if (getConfigUtil().getBoolean(IS_DISPLAY_FILLOUT_OPEN, false)) {
+            purchaserName.setText(getConfigUtil().getString(DISPLAY_GMFMC,""));
             nsrsbh.setText(getConfigUtil().getString(DISPLAY_NSRSBH, ""));
             payee.setText(getConfigUtil().getString(DISPLAY_SKY, ""));
+            phoneNum.setText(getConfigUtil().getString(DISPLAY_SPRSJH,""));
+            invoiceMaker.setText(getConfigUtil().getString(DISPLAY_KPR,""));
+
             //添加一个用于展示的虚拟商品数据
             UserGoodsModel userGoodsModel = new UserGoodsModel("测试商品", "100.00", "105.00", "5.0", "5.0");
             userGoodsModel.zk = "0.1";
@@ -337,7 +336,7 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
         GoodsListViewAdapter adapter = new GoodsListViewAdapter(model.goodList);
         lv_goodlist.setAdapter(adapter);
 
-        tv_xsfmc.setText("销货单位名称");
+        tv_xsfmc.setText("深圳联云");
 
         tv_gmfmc.setText(model.purchaserInfo.ghdwmc);
         tv_nsrsbh.setText(model.purchaserInfo.ghdwsbh);
@@ -349,6 +348,8 @@ public class PageMakeRollInvoce extends PageFragment implements View.OnClickList
         tv_fhr.setText(model.fhr);
         tv_kpr.setText(model.kpr);
         tv_bz.setText(model.bz);
+        tv_hjje.setText(GoodsDigitHelper.returnListHjje(model.goodList));
+        tv_hjse.setText(GoodsDigitHelper.returnListHjse(model.goodList));
 
     }
 

@@ -17,15 +17,16 @@ import java.util.List;
  */
 
 public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.FuctionHolder> {
-    private List<FunctionItem> itemList ;
+    private List<FunctionItem> itemList;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
+
     public FunctionAdapter(List<FunctionItem> itemList, Context context) {
         this.itemList = itemList;
         mContext = context;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -33,7 +34,7 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Fuctio
     @Override
     public FuctionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new FuctionHolder(LayoutInflater.from(mContext).inflate(
-                R.layout.item_main,parent,false));
+                R.layout.item_main, parent, false));
     }
 
     @Override
@@ -51,6 +52,7 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Fuctio
     class FuctionHolder extends RecyclerView.ViewHolder {
         private ImageView img;
         private TextView textView;
+
         public FuctionHolder(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img_left);
@@ -65,7 +67,7 @@ public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.Fuctio
 
     }
 
-    interface OnItemClickListener{
+    interface OnItemClickListener {
         void onClick(int position);
     }
 }

@@ -25,33 +25,33 @@ public class PageFragment extends Fragment {
 
     private ProgressDialog dialog;
 
-    protected void showWaitDialog(String message){
+    protected void showWaitDialog(String message) {
         dialog = new ProgressDialog(getContext());
         dialog.setMessage(message);
         dialog.setCancelable(false);
         dialog.show();
     }
 
-    protected void dismissWaitDialog(){
-        if(dialog != null && dialog.isShowing()){
+    protected void dismissWaitDialog() {
+        if (dialog != null && dialog.isShowing()) {
 
             this.dialog.dismiss();
         }
     }
 
-    protected void switchToPage(Fragment fragment){
+    protected void switchToPage(Fragment fragment) {
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_content,fragment)
+                .replace(R.id.fragment_content, fragment)
                 .commit();
     }
 
-    protected void showToast(String msg){
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+    protected void showToast(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    protected ConfigUtil getConfigUtil(){
+    protected ConfigUtil getConfigUtil() {
         return this.mConfigUtil;
     }
 }
