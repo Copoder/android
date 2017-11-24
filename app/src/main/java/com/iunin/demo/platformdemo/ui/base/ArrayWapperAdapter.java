@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,7 +31,7 @@ public class ArrayWapperAdapter<T> extends BaseAdapter {
     private LayoutInflater mInflater;
 
 
-    public ArrayWapperAdapter(Context context) {
+    public ArrayWapperAdapter(Context context, ArrayList<UserGoodsModel> models) {
         init(context, new ArrayList<T>());
     }
 

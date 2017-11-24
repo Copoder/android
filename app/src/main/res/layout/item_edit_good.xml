@@ -14,7 +14,6 @@
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/linearlayout_no_top_border"
         android:orientation="vertical"
         >
 
@@ -32,7 +31,7 @@
                 style="@style/iv_title_normal"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:gravity="left|center_vertical"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="2dip"
@@ -40,6 +39,7 @@
                 android:textSize="12sp" />
 
             <View
+                android:visibility="gone"
                 android:id="@+id/id_linefirst"
                 android:layout_width="0.1dp"
                 android:layout_height="match_parent"
@@ -58,6 +58,7 @@
                 android:textSize="12sp" />
 
             <View
+                android:visibility="gone"
                 android:id="@+id/id_linesecond"
                 android:layout_width="0.1dp"
                 android:layout_height="match_parent"
@@ -66,6 +67,7 @@
 
 
             <View
+                android:visibility="gone"
                 android:id="@+id/id_linethird"
                 android:layout_width="0.1dp"
                 android:layout_height="match_parent"
@@ -84,6 +86,7 @@
                 android:textSize="12sp" />
 
             <View
+                android:visibility="gone"
                 android:id="@+id/id_lineforth"
                 android:layout_width="0.1dp"
                 android:layout_height="match_parent"
@@ -110,12 +113,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <View
-            android:id="@+id/id_buttomline"
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:layout_weight="0"
-            android:background="@color/settings_text_color"/>
+
 
     </LinearLayout>
 

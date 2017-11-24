@@ -1,8 +1,7 @@
-package com.iunin.demo.platformdemo.makeinvoice;
+package com.iunin.demo.platformdemo.displayinfosetting;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
@@ -10,21 +9,22 @@ import com.iunin.demo.platformdemo.R;
 import com.iunin.demo.platformdemo.ui.base.PageActivity;
 
 /**
- * Created by copo on 17-11-15.
+ * Created by copo on 17-11-22.
  */
 
-public class MakeInvoiceActivity extends PageActivity {
-
+public class ActivityDisplayInfo extends PageActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_make_invoice);
-        initView();
+        setContentView(R.layout.display_info_setting);
+        initFragment();
     }
 
-
-    private void initView() {
-        switchPage(new PageSelectKplx());
+    private void initFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_content, new PageDisPlaySetting())
+                .commit();
     }
 
     @Override
@@ -33,20 +33,16 @@ public class MakeInvoiceActivity extends PageActivity {
             case KeyEvent.KEYCODE_BACK:
                 if (!(getSupportFragmentManager().findFragmentById(R.id.fragment_content)
                         instanceof
-                        PageSelectKplx)) {
-                    switchPage(new PageSelectKplx());
+                        PageDisPlaySetting)) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_content, new PageDisPlaySetting())
+                            .commit();
                 } else {
                     finish();
                 }
                 break;
         }
         return true;
-    }
-
-    private void switchPage(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_content, fragment)
-                .commit();
     }
 }

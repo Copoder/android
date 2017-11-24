@@ -1,7 +1,6 @@
 package com.iunin.demo.platformdemo.myparams;
 
 import android.database.DataSetObserver;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,13 @@ import com.iunin.demo.platformdemo.utils.Constants;
  * Created by copo on 17-11-16.
  */
 
-public class FppyAdapter implements SpinnerAdapter {
+public class TypeStringAdapter implements SpinnerAdapter {
+    private String[] datas;
+
+    public TypeStringAdapter(String[] datas){
+        this.datas = datas;
+    }
+
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View view = getView(position, convertView, parent);
@@ -34,12 +39,12 @@ public class FppyAdapter implements SpinnerAdapter {
 
     @Override
     public int getCount() {
-        return Constants.FPPY.length;
+        return datas.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return Constants.FPPY[position];
+        return datas[position];
     }
 
     @Override
@@ -54,9 +59,9 @@ public class FppyAdapter implements SpinnerAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fppy, null);
-        TextView textView = itemView.findViewById(R.id.tv_fppy);
-        textView.setText(Constants.FPPY[position]);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content, null);
+        TextView textView = itemView.findViewById(R.id.tv_content);
+        textView.setText(datas[position]);
         return itemView;
     }
 

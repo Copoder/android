@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iunin.demo.platformdemo.R;
-import com.iunin.demo.platformdemo.model.TaxGoodsModel;
 import com.iunin.service.invoice.baiwang.v1_0.userModel.UserGoodsModel;
 
 import java.util.List;
@@ -24,15 +23,15 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<UserGoodsModel> goods;
     private Context mContext;
 
-    private OnaddGoodsListener onaddGoodsListener;
+    private OnItemClickGoodsListener onItemClickGoodsListener;
 
     public GoodsListAdapter(List<UserGoodsModel> goods, Context context){
         this.goods = goods;
         mContext = context;
     }
 
-    public void setOnaddGoodsListener(OnaddGoodsListener onaddGoodsListener){
-        this.onaddGoodsListener = onaddGoodsListener;
+    public void setOnItemClickGoodsListener(OnItemClickGoodsListener onItemClickGoodsListener){
+        this.onItemClickGoodsListener = onItemClickGoodsListener;
     }
     class GoodsListHolder extends RecyclerView.ViewHolder {
         private TextView name;
@@ -73,17 +72,24 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        final int i = position;
         if(holder instanceof AddGoodsHolder){
-            if(onaddGoodsListener != null){
+            if(onItemClickGoodsListener != null){
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //添加商品的回调
-                        onaddGoodsListener.addGoods();
+                        onItemClickGoodsListener.addGoods();
                     }
                 });
             }
         }else {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickGoodsListener.modify(goods.get(i));
+                }
+            });
             final UserGoodsModel goodsModel = goods.get(position);
             ((GoodsListHolder)holder).name.setText(goodsModel.spmc);
             ((GoodsListHolder)holder).price.setText(goodsModel.hsdj);
@@ -115,7 +121,10 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return goods.size() + 1;
     }
 
-    interface OnaddGoodsListener{
+    interface OnItemClickGoodsListener{
+        //添加
         void addGoods();
+        //修改
+        void modify(UserGoodsModel model);
     }
 }

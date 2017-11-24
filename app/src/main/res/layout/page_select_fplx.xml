@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/md_nav_back"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="发票开具"
+            android:textColor="@android:color/white"
+            android:textSize="17sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+            android:id="@+id/rl_zp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <ImageView
+            android:padding="5dp"
+            android:src="@drawable/invoice"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+    <TextView
+            android:textColor="#fff"
+            android:text="增值税专用发票"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+        />
+    <ImageView
+            android:src="@drawable/go"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+</RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_pp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <ImageView
+        android:padding="5dp"
+        android:src="@drawable/invoice"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+    <TextView
+        android:textColor="#fff"
+        android:text="增值税普通发票"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+    <ImageView
+        android:src="@drawable/go"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_jp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:padding="5dp"
+            android:src="@drawable/invoice"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:textColor="#fff"
+            android:text="增值税卷式发票"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:src="@drawable/go"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_dzp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:padding="5dp"
+            android:src="@drawable/invoice"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:textColor="#fff"
+            android:text="增值税电子发票"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:src="@drawable/go"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </RelativeLayout>
+</LinearLayout>

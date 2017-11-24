@@ -9,15 +9,18 @@ import android.support.v7.widget.RecyclerView;
 
 
 import com.iunin.demo.platformdemo.R;
-import com.iunin.demo.platformdemo.invaildinvoice.ActivityInvaildInvoice;
+
+import com.iunin.demo.platformdemo.displayinfosetting.ActivityDisplayInfo;
+import com.iunin.demo.platformdemo.invaildinvoice.ActivityInvalidInvoice;
 import com.iunin.demo.platformdemo.makeinvoice.MakeInvoiceActivity;
 import com.iunin.demo.platformdemo.myparams.InfoSettingActivity;
 import com.iunin.demo.platformdemo.queryinvoice.ActivityQueryInvoice;
+import com.iunin.demo.platformdemo.ui.base.PageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends PageActivity {
     private RecyclerView mainFunctionList;
     private Context mContext;
     private List<FunctionItem> functionItems;
@@ -34,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
         mainFunctionList = findViewById(R.id.main_function);
         functionItems = new ArrayList<>();
         initFuction(functionItems);
-        MainFunctionAdapter adapter = new MainFunctionAdapter(functionItems,mContext);
+        FunctionAdapter adapter = new FunctionAdapter(functionItems,mContext);
         mainFunctionList.setAdapter(adapter);
         mainFunctionList.setLayoutManager(new LinearLayoutManager(mContext));
-        adapter.setOnItemClickListener(new MainFunctionAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new FunctionAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
                 Intent intent = new Intent(mContext,functionItems.get(position).getClazz());
@@ -49,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private void initFuction(List<FunctionItem> items) {
         items.add(new FunctionItem("发票开具",R.drawable.kp, MakeInvoiceActivity.class));
         items.add(new FunctionItem("发票查询",R.drawable.query, ActivityQueryInvoice.class));
-        items.add(new FunctionItem("发票作废",R.drawable.invaild, ActivityInvaildInvoice.class));
+        items.add(new FunctionItem("发票作废",R.drawable.invaild, ActivityInvalidInvoice.class));
         items.add(new FunctionItem("我的信息",R.drawable.mine, InfoSettingActivity.class));
+        items.add(new FunctionItem("展示设置",R.drawable.display, ActivityDisplayInfo.class));
     }
 }

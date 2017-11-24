@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,55 +21,65 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:text="我的信息"
+                android:text="发票查询"
                 android:textColor="@android:color/white"
                 android:textSize="17sp" />
         </android.support.v7.widget.Toolbar>
-        <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/common_text"
-            android:text="纳税人识别号"
-            />
-        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
-            android:id="@+id/edt_nasrsbh"
-            style="@style/common_edit"
-            />
-    </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 style="@style/common_text"
-                android:text="开票终端标识"
+                android:text="发票类型"
                 />
-            <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
-                android:id="@+id/edt_kpzdbs"
-                style="@style/common_edit"
-                />
+           <Spinner
+               android:id="@+id/fpdmlx"
+               android:layout_weight="2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"></Spinner>
         </LinearLayout>
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TextView
-            android:textSize="14sp"
-            android:background="@color/color_background_gray"
-            android:text="发票票样"
+            style="@style/common_text"
+            android:text="发票号码"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/invoice_num"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="发票代码"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/invoice_code"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="18dp" />
-        <Spinner
-            android:id="@+id/fppy_spinner"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </Spinner>
+            android:layout_height="30dp"
+            />
 
     </LinearLayout>
-    <Button
-        android:id="@+id/save_params"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="保存信息"
-        />
 </RelativeLayout>

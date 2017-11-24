@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="商品名称"
+            />
+        <TextView
+            android:id="@+id/spmc"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="商品单价"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/spdj"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="商品数量"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/spsl"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/common_text"
+            android:text="商品折扣(%)"
+            />
+        <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
+            android:id="@+id/spzk"
+            style="@style/common_edit"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

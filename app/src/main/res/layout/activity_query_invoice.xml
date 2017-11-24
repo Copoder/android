@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/md_nav_back"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="发票查询"
+                android:textColor="@android:color/white"
+                android:textSize="17sp" />
+        </android.support.v7.widget.Toolbar>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -18,10 +33,11 @@
                 style="@style/common_text"
                 android:text="发票类型"
                 />
-            <com.iunin.demo.platformdemo.ui.widgit.AutoCompleteTextViewWithDeleteView
-                android:id="@+id/fpdmlx"
-                style="@style/common_edit"
-                />
+           <Spinner
+               android:id="@+id/fpdmlx"
+               android:layout_weight="2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"></Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -53,7 +69,7 @@
     </LinearLayout>
 
         <Button
-            android:id="@+id/btn_query"
+            android:id="@+id/btn_save"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

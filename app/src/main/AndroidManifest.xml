@@ -24,10 +24,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
         </activity>
-        <activity android:name=".invaildinvoice.ActivityInvaildInvoice"
+        <activity android:name=".invaildinvoice.ActivityInvalidInvoice"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
-
+        </activity>
+        <activity android:name=".displayinfosetting.ActivityDisplayInfo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            >
         </activity>
     </application>
 

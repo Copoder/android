@@ -16,11 +16,11 @@ import java.util.List;
  * Created by copo on 17-11-13.
  */
 
-public class MainFunctionAdapter extends RecyclerView.Adapter<MainFunctionAdapter.FuctionHolder> {
+public class FunctionAdapter extends RecyclerView.Adapter<FunctionAdapter.FuctionHolder> {
     private List<FunctionItem> itemList ;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
-    public MainFunctionAdapter(List<FunctionItem> itemList, Context context) {
+    public FunctionAdapter(List<FunctionItem> itemList, Context context) {
         this.itemList = itemList;
         mContext = context;
     }
